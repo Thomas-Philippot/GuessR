@@ -8,6 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="colorControlNormal">#c5c5c5</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+        <item name="editTextColor">#FFF</item>
+        <item name="android:textColor">#FFF</item>
     </style>
 
 </resources>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "70210236091",
+    "firebase_url": "https://guessr-2dcbf.firebaseio.com",
+    "project_id": "guessr-2dcbf",
+    "storage_bucket": "guessr-2dcbf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:70210236091:android:37b016774b0a8834f1439e",
+        "android_client_info": {
+          "package_name": "fr.eni.guessr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "70210236091-oec8j118nq5d19ufsv14hjedt15oa86p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzUN-RWZ1U5HOXUw5X4nYRFHbTpdznO40"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "70210236091-oec8j118nq5d19ufsv14hjedt15oa86p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

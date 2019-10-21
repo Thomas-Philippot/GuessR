@@ -75,7 +75,6 @@
         fab:menu_labels_position="left"
         fab:menu_openDirection="up"
         fab:menu_backgroundColor="@android:color/transparent"
-        tools:ignore="MissingConstraints"
         >
 
         <com.github.clans.fab.FloatingActionButton
