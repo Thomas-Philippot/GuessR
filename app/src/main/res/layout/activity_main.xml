@@ -8,6 +8,7 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity"
     android:background="@drawable/bg_image"
+    android:fitsSystemWindows="true"
     >
 
     <Button
