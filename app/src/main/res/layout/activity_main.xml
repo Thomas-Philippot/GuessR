@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity"
+    android:background="@drawable/bg_image"
     >
 
     <Button
@@ -16,7 +17,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Jouer"
+        android:text="@string/jouer"
         android:onClick="playClicked"
         />
 
