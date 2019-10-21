@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">GuessR</string>
     <string name="jouer">Jouer</string>
+    <string name="developers">Developpeurs : Thomas et Thibaut</string>
+    <string name="share">share string</string>
+    <string name="third_party_licenses">MIT licence mamène</string>
+    <string name="about_description">Cette application vous permet de reconnaitre des mots grâce a des images</string>
 </resources>
