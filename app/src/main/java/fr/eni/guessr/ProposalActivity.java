@@ -8,7 +8,6 @@ import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
