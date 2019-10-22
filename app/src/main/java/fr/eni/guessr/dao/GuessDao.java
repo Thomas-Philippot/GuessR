@@ -9,22 +9,21 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import fr.eni.guessr.model.Level;
-import fr.eni.guessr.model.LevelWithGuesses;
+import fr.eni.guessr.model.Guess;
 
 @Dao
-public interface LevelDao {
+public interface GuessDao {
 
-    @Query("SELECT * FROM level")
+    @Query("SELECT * FROM guess")
     @Transaction
-    LiveData<List<LevelWithGuesses>> findAll();
+    LiveData<List<Guess>> findAll();
 
     @Insert
-    void insert(Level level);
+    void insert(Guess guess);
 
     @Update
-    void update(Level level);
+    void update(Guess guess);
 
-    @Query("DELETE FROM level")
+    @Query("DELETE FROM guess")
     void deleteAll();
 }

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Level {
 
-    @PrimaryKey
+    @PrimaryKey()
     private int id;
 
     private String name;
@@ -16,7 +16,8 @@ public class Level {
     public Level() {
     }
 
-    public Level(String name) {
+    public Level(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 
@@ -34,5 +35,13 @@ public class Level {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Level{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

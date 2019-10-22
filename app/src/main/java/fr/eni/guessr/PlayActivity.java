@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -36,8 +35,7 @@ public class PlayActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference("levels").child("level1").child("guess1");
+        DatabaseReference myRef = MainActivity.firebaseDatabase.getReference("levels").child("level1").child("guess1");
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

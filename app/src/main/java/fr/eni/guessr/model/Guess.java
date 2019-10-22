@@ -14,13 +14,14 @@ import java.util.List;
 @Entity
 public class Guess {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
     private int levelId;
 
     private String answer;
     private String image;
+    private String status;
 
     @Ignore
     public Guess() {
@@ -63,11 +64,22 @@ public class Guess {
         this.image = image;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Guess{" +
-                "answer='" + answer + '\'' +
+                "id=" + id +
+                ", levelId=" + levelId +
+                ", answer='" + answer + '\'' +
                 ", image='" + image + '\'' +
+                ", status=" + status +
                 '}';
     }
 
