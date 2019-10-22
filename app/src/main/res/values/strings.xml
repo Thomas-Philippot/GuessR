@@ -5,4 +5,7 @@
     <string name="share">share string</string>
     <string name="third_party_licenses">MIT licence mamène</string>
     <string name="about_description">Cette application vous permet de reconnaitre des mots grâce a des images</string>
+    <string name="play">PLAY</string>
+    <string name="image_to_set">Image to set</string>
+    <string name="mot_d_couvrir_pour_cette_photo">Mot à découvrir pour cette photo</string>
 </resources>
