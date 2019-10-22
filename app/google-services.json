@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "70210236091-j80f40fva67o8pd0idurd6j8qhdcofpg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.eni.guessr",
+            "certificate_hash": "2a603213615a2be5c7e3dc3db99cbfaec4fa569e"
+          }
+        },
+        {
           "client_id": "70210236091-oec8j118nq5d19ufsv14hjedt15oa86p.apps.googleusercontent.com",
           "client_type": 3
         }

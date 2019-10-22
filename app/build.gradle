@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "fr.eni.guessr"
-        minSdkVersion 22
+        minSdkVersion 27
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -50,4 +50,5 @@ dependencies {
     annotationProcessor 'com.android.support:support-annotations:28.0.0'
     implementation 'androidx.room:room-runtime:2.2.0'
     annotationProcessor 'androidx.room:room-compiler:2.2.0'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.5.+'
 }
