@@ -42,7 +42,8 @@
         android:autofillHints="@string/mot_d_couvrir_pour_cette_photo"
         android:inputType="text"
         android:textColor="@android:color/white"
-        android:hint="@string/mot_d_couvrir_pour_cette_photo"/>
+        android:hint="@string/mot_d_couvrir_pour_cette_photo"
+        tools:targetApi="o" />
 
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/btn_validate_porpose"
