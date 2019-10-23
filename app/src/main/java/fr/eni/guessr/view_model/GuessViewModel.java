@@ -8,21 +8,26 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import fr.eni.guessr.model.Guess;
-import fr.eni.guessr.model.Level;
-import fr.eni.guessr.model.LevelWithGuesses;
 import fr.eni.guessr.repository.GuessRepository;
-import fr.eni.guessr.repository.LevelRepository;
 
 public class GuessViewModel extends AndroidViewModel {
 
-    private GuessRepository levelRepository;
+    private GuessRepository guessRepository;
 
     public GuessViewModel(Application application) {
         super(application);
-        this.levelRepository = new GuessRepository(application);
+        this.guessRepository = new GuessRepository(application);
     }
 
     public void insert(Guess guess) {
-        this.levelRepository.insert(guess);
+        this.guessRepository.insert(guess);
+    }
+
+    public LiveData<List<Guess>> getCurrentGuess() {
+        return this.guessRepository.getCurrentGuess();
+    }
+
+    public void update(Guess guess) {
+        this.guessRepository.update(guess);
     }
 }

@@ -2,6 +2,7 @@ package fr.eni.guessr;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.animation.Animator;
@@ -10,7 +11,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,23 +18,15 @@ import android.view.animation.OvershootInterpolator;
 
 import com.facebook.stetho.Stetho;
 import com.github.clans.fab.FloatingActionMenu;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import java.util.List;
 
 import fr.eni.guessr.model.Guess;
-import fr.eni.guessr.model.Level;
-import fr.eni.guessr.model.LevelWithGuesses;
 import fr.eni.guessr.view_model.GuessViewModel;
-import fr.eni.guessr.view_model.LevelViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionMenu actionMenu;
-    public static FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private LevelViewModel levelViewModel;
     private GuessViewModel guessViewModel;
 
     @Override
@@ -43,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Stetho.initializeWithDefaults(this);
-        this.levelViewModel = ViewModelProviders.of(this).get(LevelViewModel.class);
         this.guessViewModel = ViewModelProviders.of(this).get(GuessViewModel.class);
 
         Window w = getWindow();
@@ -55,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        this.guessViewModel.getCurrentGuess().observe(this, new Observer<List<Guess>>() {
+            @Override
+            public void onChanged(List<Guess> guesses) {
+            }
+        });
     }
 
     private void createCustomAnimation() {

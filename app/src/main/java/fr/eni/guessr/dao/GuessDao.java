@@ -14,9 +14,15 @@ import fr.eni.guessr.model.Guess;
 @Dao
 public interface GuessDao {
 
-    @Query("SELECT * FROM guess")
+    @Query("SELECT * FROM guess;")
     @Transaction
     LiveData<List<Guess>> findAll();
+
+    @Query("SELECT * FROM guess WHERE status = 'TODO' ORDER by levelId, id;")
+    LiveData<List<Guess>> getCurrentGuess();
+
+    @Query("SELECT * FROM guess WHERE levelId = :id")
+    LiveData<List<Guess>> getGuessByLevelId(int id);
 
     @Insert
     void insert(Guess guess);
@@ -24,6 +30,6 @@ public interface GuessDao {
     @Update
     void update(Guess guess);
 
-    @Query("DELETE FROM guess")
+    @Query("DELETE FROM guess;")
     void deleteAll();
 }

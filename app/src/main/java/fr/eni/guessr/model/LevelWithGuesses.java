@@ -19,6 +19,14 @@ public class LevelWithGuesses {
         this.guesses = new ArrayList<>();
     }
 
+    public List<Guess> getGuesses() {
+        return guesses;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
     @Override
     public String toString() {
         return "LevelWithGuesses{" +
