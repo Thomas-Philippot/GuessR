@@ -130,9 +130,16 @@ public class ProposalActivity extends AppCompatActivity {
                 myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshotLevel) {
+                        if(!snapshotLevel.hasChild("id")){
+                            Log.d("TOTO, LEVEL : ", "Creation de l'id");
+                            myRef.child("id").setValue(levelToSearch);
+                        }
                         for(DataSnapshot guessSnapshot : snapshotLevel.getChildren()){
                             if(!"id".equals(guessSnapshot.getKey())){
-                                lastGuessNumber = Integer.parseInt(Objects.requireNonNull(guessSnapshot.getKey()).substring(5));
+                                int toCompare = Integer.parseInt(Objects.requireNonNull(guessSnapshot.getKey()).substring(5));
+                                if(toCompare > lastGuessNumber){
+                                    lastGuessNumber = Integer.parseInt(Objects.requireNonNull(guessSnapshot.getKey()).substring(5));
+                                }
                                 Guess guess = guessSnapshot.getValue(Guess.class);
                                 assert guess != null;
                                 if (guess.getAnswer().equals(editTextString)){

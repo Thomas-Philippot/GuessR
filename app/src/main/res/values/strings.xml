@@ -8,4 +8,5 @@
     <string name="play">PLAY</string>
     <string name="image_to_set">Image to set</string>
     <string name="mot_d_couvrir_pour_cette_photo">Mot à découvrir pour cette photo</string>
+    <string name="image_to_load">Image To Load</string>
 </resources>
