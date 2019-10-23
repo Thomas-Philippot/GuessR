@@ -84,30 +84,35 @@ public class ProposalActivity extends AppCompatActivity {
     }
 
     public void btnValidatePorposeClicked(View view) {
+        if(this.capturedImageUri == null){
+            Toast.makeText(this, "Veuillez sélectionner une image", Toast.LENGTH_SHORT).show();
+        } else if ("".equals(String.valueOf(editText.getText()).trim())){
+            Toast.makeText(this, "Veuillez entrer un mot décrivant l'image", Toast.LENGTH_SHORT).show();
+        } else {
+            StorageReference imgRef = storageRef.child("guess/" + editText.getText());
 
-        StorageReference imgRef = storageRef.child("guess/" + editText.getText());
-
-        imgRef.putFile(this.capturedImageUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Log.wtf("TOTO : ", String.valueOf(taskSnapshot.getUploadSessionUri()));
-                        Toast.makeText(ProposalActivity.this, "Success Upload", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        Log.wtf("TOTO : ", exception.getMessage());
-                        Toast.makeText(ProposalActivity.this, "Failure Upload", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                        double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                        Log.wtf("TOTO : ", "Progress " + (int) progress + "%...");
-                    }
-        });
+            imgRef.putFile(this.capturedImageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Log.wtf("TOTO : ", String.valueOf(taskSnapshot.getUploadSessionUri()));
+                            Toast.makeText(ProposalActivity.this, "Success Upload", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            Log.wtf("TOTO : ", exception.getMessage());
+                            Toast.makeText(ProposalActivity.this, "Failure Upload", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                            Log.wtf("TOTO : ", "Progress " + (int) progress + "%...");
+                        }
+                    });
+        }
     }
 }

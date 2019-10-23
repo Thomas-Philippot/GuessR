@@ -8,7 +8,6 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity"
     android:background="@drawable/bg_image"
-    android:fitsSystemWindows="true"
     >
 
     <androidx.constraintlayout.widget.Guideline
@@ -33,17 +32,17 @@
         tools:ignore="MissingConstraints" />
 
     <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/btn_play"
         android:src="@drawable/ic_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:text="@string/jouer"
         android:onClick="playClicked"
         />
-
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/menu"
         android:layout_width="wrap_content"
