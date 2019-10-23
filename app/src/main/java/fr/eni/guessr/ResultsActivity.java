@@ -6,9 +6,13 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -52,18 +56,24 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     public void setListToView(LevelWithGuesses level) {
-        ConstraintSet constraintSet = new ConstraintSet();
-        ConstraintLayout layout = this.findViewById(R.id.result_activity);
+        LinearLayout layout = this.findViewById(R.id.result_activity);
+        layout.setId(R.id.result_activity);
+
         TextView textView = new TextView(this);
         ListView listView = new ListView(this);
-        layout.addView(listView);
         layout.addView(textView);
+        layout.addView(listView);
 
         AdapterGuess adapterGuess = new AdapterGuess(this, R.layout.row_style_guess, level.getGuesses());
         listView.setAdapter(adapterGuess);
+        listView.setId(View.generateViewId());
 
         textView.setText(level.getLevel().getName());
-        textView.setGravity(12);
+        textView.setId(View.generateViewId());
+        textView.setTextSize(40);
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) textView.getLayoutParams();
+        params.setMargins(10,10,10,10);
+
     }
 
 }
