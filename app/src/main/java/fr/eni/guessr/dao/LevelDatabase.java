@@ -66,6 +66,7 @@ public abstract class LevelDatabase extends RoomDatabase {
                                Guess guess = guessSnapshot.getValue(Guess.class);
                                if (guess != null) {
                                    guess.setLevelId(level.getId());
+                                   guess.setStatus("TODO");
                                }
                                Log.d("TOTO", "Guess trouvé : " + guess.toString());
                                new AsyncGuessInsert(guessDao).execute(guess);

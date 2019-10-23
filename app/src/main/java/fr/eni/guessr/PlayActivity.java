@@ -2,11 +2,16 @@ package fr.eni.guessr;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,12 +22,15 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.List;
+
 import fr.eni.guessr.model.Guess;
+import fr.eni.guessr.view_model.GuessViewModel;
 
 public class PlayActivity extends AppCompatActivity {
 
     private Guess currentGuess;
-    private String currentGuessString;
+    private GuessViewModel guessViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,23 +38,25 @@ public class PlayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play);
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        this.guessViewModel = ViewModelProviders.of(this).get(GuessViewModel.class);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        DatabaseReference myRef = MainActivity.firebaseDatabase.getReference("levels").child("level1").child("guess1");
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        Log.d("TOTO", "Start getCurrentGuess");
+        this.guessViewModel.getCurrentGuess().observe(this, new Observer<List<Guess>>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                currentGuess = dataSnapshot.getValue(Guess.class);
-                setViewValues();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("TOTO", "loadPost:onCancelled", databaseError.toException());
+            public void onChanged(List<Guess> guesses) {
+                if (guesses.size() < 1) {
+                    finishAffinity();
+                    Intent intent = new Intent(PlayActivity.this, GameOverActivity.class);
+                    startActivity(intent);
+                } else {
+                    currentGuess = guesses.get(0);
+                    setViewValues();
+                }
             }
         });
     }
@@ -64,5 +74,19 @@ public class PlayActivity extends AppCompatActivity {
         GlideApp.with(this)
                 .load(storageReference)
                 .into(imageView);
+    }
+
+    public void passClicked(View view) {
+        this.currentGuess.setStatus("PASSED");
+        this.guessViewModel.update(currentGuess);
+    }
+
+    public void CheckClicked(View view) {
+        EditText editText = this.findViewById(R.id.play_text);
+        if (editText.getText().toString().equals(this.currentGuess.getAnswer())) {
+            Log.d("TOTO", "same");
+            this.currentGuess.setStatus("DONE");
+            this.guessViewModel.update(currentGuess);
+        }
     }
 }
