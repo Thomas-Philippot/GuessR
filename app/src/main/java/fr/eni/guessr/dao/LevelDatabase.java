@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 import fr.eni.guessr.model.Guess;
 import fr.eni.guessr.model.Level;
 
@@ -58,16 +60,17 @@ public abstract class LevelDatabase extends RoomDatabase {
                @Override
                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                    for (DataSnapshot levelSnapshot : dataSnapshot.getChildren()) {
-                       Level level = new Level(Integer.valueOf(levelSnapshot.child("id").getValue().toString()), levelSnapshot.getKey());
+                       Level level = new Level(Integer.valueOf(Objects.requireNonNull(levelSnapshot.child("id").getValue()).toString()), levelSnapshot.getKey());
                        Log.d("TOTO", "Level trouvé : " + level.toString());
                        new AsyncLevelInsert(levelDao).execute(level);
                        for (DataSnapshot guessSnapshot : levelSnapshot.getChildren()) {
-                           if (!guessSnapshot.getKey().equals("id")) {
+                           if (!"id".equals(guessSnapshot.getKey())) {
                                Guess guess = guessSnapshot.getValue(Guess.class);
                                if (guess != null) {
                                    guess.setLevelId(level.getId());
                                    guess.setStatus("TODO");
                                }
+                               assert guess != null;
                                Log.d("TOTO", "Guess trouvé : " + guess.toString());
                                new AsyncGuessInsert(guessDao).execute(guess);
                            }
