@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import java.util.List;
 
@@ -37,8 +38,14 @@ public class AdapterGuess extends ArrayAdapter<Guess> {
 
         Guess guessToShow = getItem(position);
 
-        tvTitle.setText(guessToShow.getAnswer());
-        tvStatus.setText(guessToShow.getStatus()    );
+        tvStatus.setText(guessToShow.getStatus());
+        if (guessToShow.getStatus().equals("DONE")) {
+            tvTitle.setText(guessToShow.getAnswer());
+            tvTitle.setTextColor(ContextCompat.getColor(getContext(), R.color.colorSuccess));
+            tvStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.colorSuccess));
+        } else {
+            tvTitle.setText(guessToShow.getHint());
+        }
         return convertView;
     }
 }

@@ -1,6 +1,7 @@
 package fr.eni.guessr;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -47,7 +49,9 @@ public class ResultsActivity extends AppCompatActivity {
         this.levelViewModel.findAll().observe(this, new Observer<List<LevelWithGuesses>>() {
             @Override
             public void onChanged(List<LevelWithGuesses> levelWithGuesses) {
+                LinearLayoutCompat layout = findViewById(R.id.result_activity);
                 levels = levelWithGuesses;
+                layout.removeAllViews();
                 for (LevelWithGuesses level : levelWithGuesses) {
                     Log.d("TOTO", level.toString());
                     setListToView(level);
@@ -58,7 +62,7 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     public void setListToView(LevelWithGuesses level) {
-        LinearLayout layout = this.findViewById(R.id.result_activity);
+        LinearLayoutCompat layout = this.findViewById(R.id.result_activity);
         layout.setId(R.id.result_activity);
 
         //create all the element to display the level
@@ -82,12 +86,32 @@ public class ResultsActivity extends AppCompatActivity {
         listView.setAdapter(adapterGuess);
         listView.setId(View.generateViewId());
         listView.setDivider(this.getResources().getDrawable(R.drawable.transparent, null));
+        this.setListViewHeightBasedOnChildren(listView);
 
         //set the card view style
         cardView.setRadius(45);
-        cardView.setMinimumHeight(50);
         ViewGroup.MarginLayoutParams cardViewParams = (ViewGroup.MarginLayoutParams) cardView.getLayoutParams();
         cardViewParams.setMargins(0,0,0,50);
+    }
+
+    public void setListViewHeightBasedOnChildren(ListView listView) {
+
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+
+        int totalHeight = 0;
+        for (int i = 0, len = listAdapter.getCount(); i < len; i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight
+                + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
     }
 
 }

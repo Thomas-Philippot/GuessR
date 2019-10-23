@@ -35,7 +35,6 @@ public class PlayActivity extends AppCompatActivity {
     private EditText guessAnswerEditText;
     private FloatingActionButton submitButton;
     private FloatingActionButton skipButton;
-    private ImageView retryImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,6 @@ public class PlayActivity extends AppCompatActivity {
         this.guessAnswerEditText = this.findViewById(R.id.play_text);
         this.submitButton = this.findViewById(R.id.play_submit_button);
         this.skipButton = this.findViewById(R.id.play_pass_button);
-        this.retryImageView = this.findViewById(R.id.play_retry_button);
     }
 
     @Override
@@ -109,7 +107,6 @@ public class PlayActivity extends AppCompatActivity {
             this.guessAnswerEditText.setVisibility(View.INVISIBLE);
             this.submitButton.setVisibility(View.INVISIBLE);
             this.skipButton.setVisibility(View.INVISIBLE);
-            this.retryImageView.setVisibility(View.INVISIBLE);
         } else {
             this.loadingView.setVisibility(View.INVISIBLE);
             this.guessImageView.setVisibility(View.VISIBLE);
@@ -117,7 +114,6 @@ public class PlayActivity extends AppCompatActivity {
             this.guessAnswerEditText.setVisibility(View.VISIBLE);
             this.submitButton.setVisibility(View.VISIBLE);
             this.skipButton.setVisibility(View.VISIBLE);
-            this.retryImageView.setVisibility(View.VISIBLE);
         }
     }
 }
