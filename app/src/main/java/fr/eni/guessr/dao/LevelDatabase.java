@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import fr.eni.guessr.model.Guess;
 import fr.eni.guessr.model.Level;
 
-@Database(entities = {Level.class, Guess.class}, version = 1)
+@Database(entities = {Level.class, Guess.class}, version = 1, exportSchema = false)
 public abstract class LevelDatabase extends RoomDatabase {
 
     private static LevelDatabase INSTANCE;
