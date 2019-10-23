@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-1210220444377687/1030344592"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
             />
     </LinearLayout>
 
@@ -65,7 +65,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:padding="15dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         fab:menu_fab_size="normal"
         fab:menu_showShadow="true"
         fab:menu_shadowColor="#66000000"
