@@ -1,6 +1,7 @@
 package fr.eni.guessr;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.lifecycle.Observer;
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -59,21 +61,33 @@ public class ResultsActivity extends AppCompatActivity {
         LinearLayout layout = this.findViewById(R.id.result_activity);
         layout.setId(R.id.result_activity);
 
+        //create all the element to display the level
         TextView textView = new TextView(this);
         ListView listView = new ListView(this);
+        CardView cardView = new CardView(this);
         layout.addView(textView);
-        layout.addView(listView);
+        cardView.addView(listView);
+        layout.addView(cardView);
 
+        //set the level name text style and content
+        String levelName = level.getLevel().getName();
+        textView.setText(levelName.substring(0, 1).toUpperCase() + levelName.substring(1, 5) + " " + levelName.substring(5));
+        textView.setId(View.generateViewId());
+        textView.setTextSize(40);
+        ViewGroup.MarginLayoutParams textViewParams = (ViewGroup.MarginLayoutParams) textView.getLayoutParams();
+        textViewParams.setMargins(0,40,0,40);
+
+        //set the list style and content
         AdapterGuess adapterGuess = new AdapterGuess(this, R.layout.row_style_guess, level.getGuesses());
         listView.setAdapter(adapterGuess);
         listView.setId(View.generateViewId());
+        listView.setDivider(this.getResources().getDrawable(R.drawable.transparent, null));
 
-        textView.setText(level.getLevel().getName());
-        textView.setId(View.generateViewId());
-        textView.setTextSize(40);
-        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) textView.getLayoutParams();
-        params.setMargins(10,10,10,10);
-
+        //set the card view style
+        cardView.setRadius(45);
+        cardView.setMinimumHeight(50);
+        ViewGroup.MarginLayoutParams cardViewParams = (ViewGroup.MarginLayoutParams) cardView.getLayoutParams();
+        cardViewParams.setMargins(0,0,0,50);
     }
 
 }

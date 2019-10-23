@@ -33,10 +33,12 @@ public class AdapterGuess extends ArrayAdapter<Guess> {
         }
 
         TextView tvTitle = convertView.findViewById(R.id.list_guess_title);
+        TextView tvStatus = convertView.findViewById(R.id.list_guess_status);
 
         Guess guessToShow = getItem(position);
 
         tvTitle.setText(guessToShow.getAnswer());
+        tvStatus.setText(guessToShow.getStatus()    );
         return convertView;
     }
 }

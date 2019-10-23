@@ -6,4 +6,5 @@
     <color name="colorSuccess">#28a745</color>
     <color name="colorInfo">#007bff</color>
     <color name="colorWhite">#FFFFFF</color>
+    <drawable name="transparent">#00000000</drawable>
 </resources>
