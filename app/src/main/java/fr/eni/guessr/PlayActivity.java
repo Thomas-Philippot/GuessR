@@ -2,13 +2,18 @@ package fr.eni.guessr;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+//import android.view.animation.Animation;
+//import android.view.animation.AnimationUtils;
+//import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -35,7 +40,8 @@ public class PlayActivity extends AppCompatActivity {
     private EditText guessAnswerEditText;
     private FloatingActionButton submitButton;
     private FloatingActionButton skipButton;
-    private ImageView retryImageView;
+//    private Button btnSuccess;
+//    private Animation myAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +57,14 @@ public class PlayActivity extends AppCompatActivity {
         this.guessAnswerEditText = this.findViewById(R.id.play_text);
         this.submitButton = this.findViewById(R.id.play_submit_button);
         this.skipButton = this.findViewById(R.id.play_pass_button);
-        this.retryImageView = this.findViewById(R.id.play_retry_button);
+//        this.btnSuccess = this.findViewById(R.id.play_btn_succes_animated);
+//        this.myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+
+        InputFilter[] editFilters = this.guessAnswerEditText.getFilters();
+        InputFilter[] newFilters = new InputFilter[editFilters.length + 1];
+        System.arraycopy(editFilters, 0, newFilters, 0, editFilters.length);
+        newFilters[editFilters.length] = new InputFilter.AllCaps();
+        this.guessAnswerEditText.setFilters(newFilters);
     }
 
     @Override
@@ -70,6 +83,8 @@ public class PlayActivity extends AppCompatActivity {
                     currentGuess = guesses.get(0);
                     setViewValues();
                     PlayActivity.this.loading(false);
+//                    btnSuccess.startAnimation(myAnim);
+                    guessAnswerEditText.setText("");
                 }
             }
         });
@@ -98,6 +113,8 @@ public class PlayActivity extends AppCompatActivity {
             Log.d("TOTO", "same");
             this.currentGuess.setStatus("DONE");
             this.guessViewModel.update(currentGuess);
+        } else {
+            Toast.makeText(this, "Incorrect", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -109,7 +126,6 @@ public class PlayActivity extends AppCompatActivity {
             this.guessAnswerEditText.setVisibility(View.INVISIBLE);
             this.submitButton.setVisibility(View.INVISIBLE);
             this.skipButton.setVisibility(View.INVISIBLE);
-            this.retryImageView.setVisibility(View.INVISIBLE);
         } else {
             this.loadingView.setVisibility(View.INVISIBLE);
             this.guessImageView.setVisibility(View.VISIBLE);
@@ -117,7 +133,6 @@ public class PlayActivity extends AppCompatActivity {
             this.guessAnswerEditText.setVisibility(View.VISIBLE);
             this.submitButton.setVisibility(View.VISIBLE);
             this.skipButton.setVisibility(View.VISIBLE);
-            this.retryImageView.setVisibility(View.VISIBLE);
         }
     }
 }
