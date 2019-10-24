@@ -3,19 +3,13 @@ package fr.eni.guessr;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,16 +17,12 @@ import android.widget.TextView;
 import java.util.List;
 
 import fr.eni.guessr.adapter.AdapterGuess;
-import fr.eni.guessr.model.Guess;
-import fr.eni.guessr.model.Level;
 import fr.eni.guessr.model.LevelWithGuesses;
 import fr.eni.guessr.view_model.LevelViewModel;
 
 public class ResultsActivity extends AppCompatActivity {
 
     private LevelViewModel levelViewModel;
-    private List<LevelWithGuesses> levels;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +40,6 @@ public class ResultsActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<LevelWithGuesses> levelWithGuesses) {
                 LinearLayoutCompat layout = findViewById(R.id.result_activity);
-                levels = levelWithGuesses;
                 layout.removeAllViews();
                 for (LevelWithGuesses level : levelWithGuesses) {
                     Log.d("TOTO", level.toString());

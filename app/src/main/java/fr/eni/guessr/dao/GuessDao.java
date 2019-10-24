@@ -18,7 +18,7 @@ public interface GuessDao {
     @Transaction
     LiveData<List<Guess>> findAll();
 
-    @Query("SELECT * FROM guess WHERE status = 'TODO' ORDER by levelId, id;")
+    @Query("SELECT * FROM guess WHERE status = 'TODO' OR status = 'PASSED' ORDER by levelId ASC, status DESC;")
     LiveData<List<Guess>> getCurrentGuess();
 
     @Query("SELECT * FROM guess WHERE levelId = :id")
